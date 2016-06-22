@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["mail@georg-ledermann.de"]
 
   spec.summary       = %q{Export booking data in DATEV format}
-  spec.description   = %q{Create CSV files according the standard }
+  spec.description   = %q{Provides an easy way to create CSV files which can be imported into accounting applications}
   spec.homepage      = "https://github.com/ledermann/datev"
   spec.license       = "MIT"
 
