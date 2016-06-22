@@ -1,5 +1,2 @@
-require "datev/version"
-
-module Datev
-  # Your code goes here...
-end
+require 'datev/version'
+require 'datev/export'
