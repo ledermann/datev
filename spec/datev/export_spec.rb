@@ -30,6 +30,7 @@ describe Datev::Export do
     export = Datev::Export.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
+      'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
       'Berater'         => 123,
       'Mandant'         => 456,
       'WJ-Beginn'       => Date.new(2016,1,1),
@@ -138,6 +139,15 @@ describe Datev::Export do
         expect {
           CSV.read(filename, Datev::Export::CSV_OPTIONS)
         }.to_not raise_error
+      end
+    end
+
+    it 'should export a file identically to the given example' do
+      Dir.mktmpdir do |dir|
+        filename = "#{dir}/EXTF_Buchungsstapel.csv"
+        export.to_file(filename)
+
+        expect(IO.read(filename)).to eq(IO.read('examples/EXTF_Buchungsstapel.csv'))
       end
     end
   end
