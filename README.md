@@ -4,6 +4,7 @@ Ruby gem for exporting bookings to DATEV via CSV file
 
 [![Build Status](https://travis-ci.org/ledermann/datev.svg?branch=master)](https://travis-ci.org/ledermann/datev)
 [![Code Climate](https://codeclimate.com/github/ledermann/datev/badges/gpa.svg)](https://codeclimate.com/github/ledermann/datev)
+[![Coverage Status](https://coveralls.io/repos/github/ledermann/datev/badge.svg?branch=master)](https://coveralls.io/github/ledermann/datev?branch=master)
 
 ## Installation
 
