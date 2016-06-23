@@ -20,14 +20,14 @@ module Datev
     }
 
     def initialize(header_attributes)
+      raise ArgumentError.new('Hash required') unless header_attributes.is_a?(Hash)
+
       @header = Header.new DEFAULT_HEADER_ATTRIBUTES.merge(header_attributes)
       @rows = []
     end
 
-    def <<(booking)
-      raise ArgumentError.new('Param must be a Datev::Booking instance') unless booking.is_a?(Booking)
-
-      @rows << booking
+    def <<(attributes)
+      @rows << Datev::Booking.new(attributes)
     end
 
     def to_s

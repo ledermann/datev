@@ -22,6 +22,8 @@ module Datev
     def initialize(attributes)
       self.attributes = {}
 
+      raise ArgumentError.new('Hash required') unless attributes.is_a?(Hash)
+
       # Check existing name and set value (if valid)
       attributes.each_pair do |name,value|
         unless field = self.class.fields.find { |f| f.name == name }

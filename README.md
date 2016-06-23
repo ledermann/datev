@@ -35,7 +35,7 @@ export = Datev::Export.new(
   'Bezeichnung'     => 'Beispiel-Buchungen'
 ) # For available hash keys see /lib/datev/header.rb
 
-export << Datev::Booking.new(
+export << {
   'Belegdatum'                     => Date.new(2016,6,21),
   'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
   'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
@@ -43,9 +43,9 @@ export << Datev::Booking.new(
   'Konto'                          => 1200,
   'Gegenkonto (ohne BU-Schlüssel)' => 4940,
   'BU-Schlüssel'                   => '8'
-) # For available hash keys see /lib/datev/booking.rb
+} # For available hash keys see /lib/datev/booking.rb
 
-export << Datev::Booking.new(
+export << {
   'Belegdatum'                     => Date.new(2016,6,22),
   'Buchungstext'                   => 'Honorar FiBu-Seminar',
   'Umsatz (ohne Soll/Haben-Kz)'    => 5950.00,
@@ -53,7 +53,7 @@ export << Datev::Booking.new(
   'Konto'                          => 10000,
   'Gegenkonto (ohne BU-Schlüssel)' => 8400,
   'Belegfeld 1'                    => 'RE201606-135'
-)
+}
 
 export.to_file('EXTF_Buchungsstapel.csv')
 ```

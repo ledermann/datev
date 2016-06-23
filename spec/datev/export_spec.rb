@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Datev::Export do
   let(:booking1) {
-    Datev::Booking.new(
+    {
       'Belegdatum'                     => Date.new(2016,6,21),
       'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
       'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
@@ -11,11 +11,11 @@ describe Datev::Export do
       'Konto'                          => 1200,
       'Gegenkonto (ohne BU-Schlüssel)' => 4940,
       'BU-Schlüssel'                   => '8'
-    )
+    }
   }
 
   let(:booking2) {
-    Datev::Booking.new(
+    {
       'Belegdatum'                     => Date.new(2016,6,22),
       'Buchungstext'                   => 'Honorar FiBu-Seminar',
       'Umsatz (ohne Soll/Haben-Kz)'    => 5950.00,
@@ -23,7 +23,7 @@ describe Datev::Export do
       'Konto'                          => 10000,
       'Gegenkonto (ohne BU-Schlüssel)' => 8400,
       'Belegfeld 1'                    => 'RE201606-135'
-    )
+    }
   }
 
   let(:export) do
@@ -41,6 +41,63 @@ describe Datev::Export do
     export << booking1
     export << booking2
     export
+  end
+
+  describe :initialize do
+    it "should accept Hash with valid keys" do
+      expect {
+        Datev::Export.new(
+          'Berater' => 123,
+          'Mandant' => 456
+        )
+      }.to_not raise_error
+    end
+
+    it "should accept blank Hash" do
+      expect {
+        Datev::Export.new({})
+      }.to_not raise_error
+    end
+
+    it "should not accept Hash with invalid keys" do
+      expect {
+        Datev::Export.new(
+          'foo' => 'bar'
+        )
+      }.to raise_error(ArgumentError)
+    end
+
+    it "should not accept other types" do
+      expect {
+        Datev::Export.new(42)
+      }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe :<< do
+    it "should accept Hash with valid keys" do
+      expect {
+        export << {
+          'Belegdatum'                     => Date.today,
+          'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
+          'Soll/Haben-Kennzeichen'         => 'H',
+          'Konto'                          => 1200,
+          'Gegenkonto (ohne BU-Schlüssel)' => 4940
+        }
+      }.to_not raise_error
+    end
+
+    it "should not accept hash with missing keys" do
+      expect {
+        export << {}
+      }.to raise_error(ArgumentError)
+    end
+
+    it "should not accept other types" do
+      expect {
+        export << 42
+      }.to raise_error(ArgumentError)
+    end
   end
 
   describe :to_s do
