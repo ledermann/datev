@@ -1,10 +1,11 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe Datev::Export do
   let(:booking1) {
     Datev::Booking.new(
       'Belegdatum'                     => Date.new(2016,6,21),
-      'Buchungstext'                   => 'Fachbuch: Controlling for Dummies',
+      'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
       'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
       'Soll/Haben-Kennzeichen'         => 'H',
       'Konto'                          => 1200,
@@ -25,7 +26,7 @@ describe Datev::Export do
     )
   }
 
-  subject do
+  let(:export) do
     export = Datev::Export.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
@@ -42,24 +43,45 @@ describe Datev::Export do
     export
   end
 
-  it 'should export as string' do
-    csv_string = subject.to_s
+  describe :to_s do
+    subject { export.to_s }
 
-    expect(csv_string).to be_a(String)
-    expect(csv_string.lines.length).to eq(4)
-    expect(csv_string).to include('4940')
-    expect(csv_string).to include('Controlling for Dummies')
+    it 'should export as string' do
+      expect(subject).to be_a(String)
+      expect(subject.lines.length).to eq(4)
+    end
+
+    it "should encode in Windows-1252" do
+      expect(subject.encoding).to eq(Encoding::WINDOWS_1252)
+    end
+
+    it "should contain header" do
+      expect(subject.lines[0]).to include('EXTF;510')
+    end
+
+    it "should contain field names" do
+      expect(subject.lines[1]).to include('Umsatz (ohne Soll/Haben-Kz);Soll/Haben-Kennzeichen')
+    end
+
+    it "should contain bookings" do
+      expect(subject.lines[2]).to include('4940')
+      expect(subject.lines[2].encode(Encoding::UTF_8)).to include('Controlling für Dummies')
+
+      expect(subject.lines[3]).to include('8400')
+      expect(subject.lines[3].encode(Encoding::UTF_8)).to include('Honorar FiBu-Seminar')
+    end
   end
 
-  it 'should export a valid CSV file' do
-    Dir.mktmpdir do |dir|
-      filename = "#{dir}/EXTF_Buchungsstapel.csv"
-      subject.to_file(filename)
+  describe :to_file do
+    it 'should export a valid CSV file' do
+      Dir.mktmpdir do |dir|
+        filename = "#{dir}/EXTF_Buchungsstapel.csv"
+        export.to_file(filename)
 
-      expect(File).to exist(filename)
-      expect {
-        CSV.read(filename)
-      }.to_not raise_error
+        expect {
+          CSV.read(filename, Datev::Export::CSV_OPTIONS)
+        }.to_not raise_error
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ require 'datev/booking'
 
 module Datev
   class Export
-    CSV_OPTIONS = { :col_sep => ';' }
+    CSV_OPTIONS = { :col_sep => ';', :encoding => 'windows-1252' }
 
     DEFAULT_HEADER_ATTRIBUTES = {
       'DATEV-Format-KZ' => 'EXTF',

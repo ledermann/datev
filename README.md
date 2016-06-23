@@ -34,7 +34,7 @@ export = Datev::Export.new(
 
 export << Datev::Booking.new(
   'Belegdatum'                     => Date.new(2016,6,21),
-  'Buchungstext'                   => 'Fachbuch: Controlling for Dummies',
+  'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
   'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
   'Soll/Haben-Kennzeichen'         => 'H',
   'Konto'                          => 1200,
