@@ -37,23 +37,24 @@ module Datev
     end
 
     def validate!(value)
-      if value
+      if value.nil?
+        raise ArgumentError.new("Value for field '#{name}' is required") if required?
+      else
         case type
         when :string
-          raise ArgumentError.new("Field '#{name}' is not a String") unless value.is_a?(String)
-          raise ArgumentError.new("Value '#{value}' fo field '#{name}' is too long") if limit && value.length > limit
+          raise ArgumentError.new("Value given for field '#{name}' is not a String") unless value.is_a?(String)
+          raise ArgumentError.new("Value '#{value}' for field '#{name}' is too long") if limit && value.length > limit
         when :integer
-          raise ArgumentError.new("Field '#{name}' is not an Integer") unless value.is_a?(Integer)
-          raise ArgumentError.new("Value '#{value}' fo field '#{name}' is too long") if limit && value.to_s.length > limit
+          raise ArgumentError.new("Value given for field '#{name}' is not an Integer") unless value.is_a?(Integer)
+          raise ArgumentError.new("Value '#{value}' for field '#{name}' is too long") if limit && value.to_s.length > limit
         when :decimal
-          raise ArgumentError.new("Field '#{name}' is not a Numeric") unless value.is_a?(Numeric)
+          raise ArgumentError.new("Value given for field '#{name}' is not a Decimal") unless value.is_a?(Numeric)
+          raise ArgumentError.new("Value '#{value}' for field '#{name}' is too long") if precision && value.to_s.length > precision+1
         when :date
-          raise ArgumentError.new("Field '#{name}' is not a Date or Time") unless value.is_a?(Time) || value.is_a?(Date)
+          raise ArgumentError.new("Value given for field '#{name}' is not a Date or Time") unless value.is_a?(Time) || value.is_a?(Date)
         when :boolean
-          raise ArgumentError.new("Field '#{name}' is not a Boolean") unless [true, false].include?(value)
+          raise ArgumentError.new("Value given for field '#{name}' is not a Boolean") unless [true, false].include?(value)
         end
-      elsif required?
-        raise ArgumentError.new("Field '#{name}' is required")
       end
     end
 

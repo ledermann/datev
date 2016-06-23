@@ -13,7 +13,7 @@ module Datev
 
       # Check if there is already a field with the same name
       if self.fields.find { |f| f.name == name }
-        raise ArgumentError.new("Field #{name} already exists")
+        raise ArgumentError.new("Field '#{name}' already exists")
       end
 
       self.fields << Field.new(name, type, options)
@@ -24,10 +24,10 @@ module Datev
 
       raise ArgumentError.new('Hash required') unless attributes.is_a?(Hash)
 
-      # Check existing name and set value (if valid)
+      # Check existing names and set value (if valid)
       attributes.each_pair do |name,value|
         unless field = self.class.fields.find { |f| f.name == name }
-          raise ArgumentError.new("Field #{name} not found")
+          raise ArgumentError.new("Field '#{name}' not found")
         end
 
         field.validate!(value)
@@ -37,7 +37,7 @@ module Datev
       # Check for missing values
       self.class.fields.select(&:required?).each do |field|
         if attributes[field.name].nil?
-          raise ArgumentError.new("Field #{field.name} is required but missing")
+          raise ArgumentError.new("Value for field '#{field.name}' is required but missing")
         end
       end
     end

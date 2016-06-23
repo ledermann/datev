@@ -13,15 +13,19 @@ describe Datev::Field do
     it "should not allow invalid params" do
       expect {
         Datev::Field.new :foo, :xy
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, 'Name param has to be a String')
 
       expect {
         Datev::Field.new 'foo', :xy
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, 'Type param not recognized')
 
       expect {
         Datev::Field.new 'foo', :string, :bar => 42
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, 'Options param includes unknown key')
+
+      expect {
+        Datev::Field.new 'foo', :string, 42
+      }.to raise_error(ArgumentError, 'Options param has to be a Hash')
     end
   end
 

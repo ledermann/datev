@@ -64,13 +64,13 @@ describe Datev::Export do
         Datev::Export.new(
           'foo' => 'bar'
         )
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, "Field 'foo' not found")
     end
 
     it "should not accept other types" do
       expect {
         Datev::Export.new(42)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, "Hash required")
     end
   end
 
@@ -90,13 +90,13 @@ describe Datev::Export do
     it "should not accept hash with missing keys" do
       expect {
         export << {}
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, "Value for field 'Umsatz (ohne Soll/Haben-Kz)' is required but missing")
     end
 
     it "should not accept other types" do
       expect {
         export << 42
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, "Hash required")
     end
   end
 

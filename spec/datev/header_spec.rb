@@ -22,7 +22,7 @@ describe Datev::Header do
         Datev::Header.new(
           'Foo' => 100.12
         )
-      }.to raise_error(ArgumentError)
+      }.to raise_error(ArgumentError, "Field 'Foo' not found")
     end
   end
 end
