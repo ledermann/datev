@@ -36,6 +36,14 @@ module Datev
       options[:limit]
     end
 
+    def precision
+      options[:precision]
+    end
+
+    def scale
+      options[:scale]
+    end
+
     def validate!(value)
       if value.nil?
         raise ArgumentError.new("Value for field '#{name}' is required") if required?
@@ -59,7 +67,7 @@ module Datev
     end
 
     def output(value)
-      return unless value
+      return if value.nil?
 
       case type
       when :string
@@ -67,7 +75,7 @@ module Datev
       when :integer
         value.to_s.rjust(limit, '0')
       when :decimal
-        value.to_s.sub('.',',')
+        ("%#{precision - scale - 1}.#{scale}f" % value).sub('.',',')
       when :boolean
         value ? 1 : 0
       when :date
