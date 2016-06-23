@@ -78,7 +78,7 @@ describe Datev::Field do
   end
 
   context :decimal do
-    let(:field) { Datev::Field.new 'foo', :decimal, :precision => 4, :scale => 2, :required => true }
+    let(:field) { Datev::Field.new 'foo', :decimal, :precision => 6, :scale => 2, :required => true }
 
     describe :validate! do
       it "should accept valid value" do
@@ -89,14 +89,18 @@ describe Datev::Field do
         [ '123', true, Date.new(2016,1,1) ].each do |value|
           expect { field.validate!(value) }.to raise_error(ArgumentError, "Value given for field 'foo' is not a Decimal")
         end
-        expect { field.validate!(1000.5)  }.to raise_error(ArgumentError, "Value '1000.5' for field 'foo' is too long")
+        expect { field.validate!(100000.5)}.to raise_error(ArgumentError, "Value '100000.5' for field 'foo' is too long")
         expect { field.validate!(nil)     }.to raise_error(ArgumentError, "Value for field 'foo' is required")
       end
     end
 
     describe :output do
       it "should format" do
+        expect(field.output(1)).to eq('1,00')
+        expect(field.output(10)).to eq('10,00')
         expect(field.output(1.2)).to eq('1,20')
+        expect(field.output(10.21)).to eq('10,21')
+        expect(field.output(1.238)).to eq('1,24')
       end
     end
   end

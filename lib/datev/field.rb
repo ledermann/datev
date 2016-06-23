@@ -75,7 +75,7 @@ module Datev
       when :integer
         value.to_s.rjust(limit, '0')
       when :decimal
-        ("%#{precision - scale - 1}.#{scale}f" % value).sub('.',',')
+        ("%.#{scale}f" % value).sub('.',',')
       when :boolean
         value ? 1 : 0
       when :date
