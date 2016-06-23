@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Datev::Booking do
-  context "with all required fields" do
-    it "should be allowed" do
+  describe :initialize do
+    it "should be allowed with all required fields" do
       expect {
         Datev::Booking.new 'Umsatz (ohne Soll/Haben-Kz)'    => 100.12,
                            'Soll/Haben-Kennzeichen'         => 'S',
@@ -12,18 +12,14 @@ describe Datev::Booking do
                            'Buchungstext'                   => 'ATM'
       }.to_not raise_error
     end
-  end
 
-  context "with missing fields" do
-    it "should not be allowed" do
+    it "should not be allowed if fields are missing" do
       expect {
         Datev::Booking.new 'Umsatz (ohne Soll/Haben-Kz)' => 100.12
       }.to raise_error(ArgumentError)
     end
-  end
 
-  context "with unknown field names " do
-    it "should not be allowed" do
+    it "should not be allowed for unknown fields names" do
       expect {
         Datev::Booking.new 'Umsatz' => 100.12
       }.to raise_error(ArgumentError)
