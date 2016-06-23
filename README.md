@@ -28,8 +28,9 @@ export = Datev::Export.new(
   'Mandant'         => 456,
   'WJ-Beginn'       => Date.new(2016,1,1),
   'Datum vom'       => Date.new(2016,6,1),
-  'Datum bis'       => Date.new(2016,6,30)
-)
+  'Datum bis'       => Date.new(2016,6,30),
+  'Bezeichnung'     => 'Beispiel-Buchungen'
+) # For available hash keys see /lib/datev/header.rb
 
 export << Datev::Booking.new(
   'Belegdatum'                     => Date.new(2016,6,21),
@@ -39,7 +40,7 @@ export << Datev::Booking.new(
   'Konto'                          => 1200,
   'Gegenkonto (ohne BU-Schlüssel)' => 4940,
   'BU-Schlüssel'                   => '8'
-)
+) # For available hash keys see /lib/datev/booking.rb
 
 export << Datev::Booking.new(
   'Belegdatum'                     => Date.new(2016,6,22),
@@ -48,7 +49,6 @@ export << Datev::Booking.new(
   'Soll/Haben-Kennzeichen'         => 'S',
   'Konto'                          => 10000,
   'Gegenkonto (ohne BU-Schlüssel)' => 8400,
-  'BU-Schlüssel'                   => '3',
   'Belegfeld 1'                    => 'RE201606-135'
 )
 
