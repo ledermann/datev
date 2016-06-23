@@ -28,16 +28,16 @@ describe Datev::Field do
   describe :validate! do
     let(:field) { Datev::Field.new 'foo', :string, :limit => 3, :required => true }
 
-    it "should be true for valid value" do
+    it "should accept valid value" do
       expect { field.validate!('Bar') }.to_not raise_error
     end
 
-    it "should fail for invalid value" do
+    it "should fail for invalid values" do
       expect { field.validate!('MuchTooLong') }.to raise_error(ArgumentError)
-    end
-
-    it "should fail for invalid value" do
-      expect { field.validate!(nil) }.to raise_error(ArgumentError)
+      expect { field.validate!(123)           }.to raise_error(ArgumentError)
+      expect { field.validate!(123.45)        }.to raise_error(ArgumentError)
+      expect { field.validate!(true)          }.to raise_error(ArgumentError)
+      expect { field.validate!(nil)           }.to raise_error(ArgumentError)
     end
   end
 end
