@@ -12,7 +12,7 @@ module Datev
       'Datenkategorie'  => 21,
       'Formatname'      => 'Buchungsstapel',
       'Formatversion'   => 7,
-      'Erzeugt am'      => Time.now,
+      'Erzeugt am'      => Time.now.utc,
       'Sachkontenlänge' => 4,
       'Bezeichnung'     => 'Buchungen',
       'Buchungstyp'     => 1,
