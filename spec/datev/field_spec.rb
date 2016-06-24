@@ -71,8 +71,8 @@ describe Datev::Field do
     end
 
     describe :output do
-      it "should fill with 0" do
-        expect(field.output(1)).to eq('001')
+      it "should return value as string" do
+        expect(field.output(1)).to eq('1')
       end
     end
   end

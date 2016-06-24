@@ -73,7 +73,7 @@ module Datev
       when :string
         value
       when :integer
-        value.to_s.rjust(limit, '0')
+        value.to_s
       when :decimal
         ("%.#{scale}f" % value).sub('.',',')
       when :boolean

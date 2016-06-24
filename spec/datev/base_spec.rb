@@ -63,7 +63,7 @@ describe Datev::Base do
         'alive'           => true
       )
 
-      expect(person.to_a).to eq([ 'John', '0000000666', '83,6', '30041975', 1 ])
+      expect(person.to_a).to eq([ 'John', '666', '83,6', '30041975', 1 ])
     end
   end
 end
