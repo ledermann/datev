@@ -12,11 +12,15 @@ module Datev
       self.fields ||= []
 
       # Check if there is already a field with the same name
-      if self.fields.find { |f| f.name == name }
+      if field_by_name(name)
         raise ArgumentError.new("Field '#{name}' already exists")
       end
 
       self.fields << Field.new(name, type, options, &block)
+    end
+
+    def self.field_by_name(name)
+      self.fields.find { |f| f.name == name }
     end
 
     def initialize(attributes)
@@ -26,7 +30,7 @@ module Datev
 
       # Check existing names and set value (if valid)
       attributes.each_pair do |name,value|
-        unless field = self.class.fields.find { |f| f.name == name }
+        unless field = self.class.field_by_name(name)
           raise ArgumentError.new("Field '#{name}' not found")
         end
 
@@ -43,7 +47,7 @@ module Datev
     end
 
     def [](name)
-      field = self.class.fields.find { |f| f.name == name }
+      field = self.class.field_by_name(name)
       raise ArgumentError.new("Field '#{name}' not found") unless field
 
       attributes[field.name]
