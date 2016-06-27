@@ -30,11 +30,11 @@ module Datev
   private
 
     def write(csv)
-      csv << @header.to_a
+      csv << @header.output
       csv << Booking.fields.map(&:name)
 
       @rows.each do |row|
-        csv << row.to_a
+        csv << row.output(@header)
       end
     end
   end

@@ -8,7 +8,7 @@ module Datev
 
     attr_accessor :attributes
 
-    def self.field(name, type, options={})
+    def self.field(name, type, options={}, &block)
       self.fields ||= []
 
       # Check if there is already a field with the same name
@@ -16,7 +16,7 @@ module Datev
         raise ArgumentError.new("Field '#{name}' already exists")
       end
 
-      self.fields << Field.new(name, type, options)
+      self.fields << Field.new(name, type, options, &block)
     end
 
     def initialize(attributes)
@@ -42,10 +42,17 @@ module Datev
       end
     end
 
-    def to_a
+    def [](name)
+      field = self.class.fields.find { |f| f.name == name }
+      raise ArgumentError.new("Field '#{name}' not found") unless field
+
+      attributes[field.name]
+    end
+
+    def output(context=nil)
       self.class.fields.map do |field|
         value = attributes[field.name]
-        field.output(value)
+        field.output(value, context)
       end
     end
   end

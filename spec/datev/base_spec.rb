@@ -5,10 +5,24 @@ class Person < Datev::Base
   field 'favorite number', :integer, :limit => 10
   field 'weight',          :decimal, :precision => 4, :scale => 1
   field 'birthday',        :date, :format => '%d%m%Y'
-  field 'alive',           :boolean
+  field 'alive',           :boolean do
+    def output(value, context)
+      value ? 'yes' : 'no'
+    end
+  end
 end
 
 describe Datev::Base do
+  let(:person) {
+    Person.new(
+      'name'            => 'John',
+      'favorite number' => 666,
+      'weight'          => 83.6,
+      'birthday'        => Date.new(1975,4,30),
+      'alive'           => true
+    )
+  }
+
   describe '.field' do
     it "should build definition" do
       expect(Person.fields.count).to eq(5)
@@ -53,17 +67,30 @@ describe Datev::Base do
     end
   end
 
-  describe :to_a do
-    it "should return array with formatted values" do
-      person = Person.new(
-        'name'            => 'John',
-        'favorite number' => 666,
-        'weight'          => 83.6,
-        'birthday'        => Date.new(1975,4,30),
-        'alive'           => true
-      )
+  describe :[] do
+    it "should return raw value" do
+      expect(person['name']).to eq 'John'
+      expect(person['favorite number']).to eq 666
+      expect(person['weight']).to eq 83.6
+      expect(person['birthday']).to eq Date.new(1975,4,30)
+      expect(person['alive']).to eq true
+    end
 
-      expect(person.to_a).to eq([ 'John', '666', '83,6', '30041975', 1 ])
+    it "should fail for unknown field name" do
+      expect {
+        person['foobar']
+      }.to raise_error(ArgumentError, "Field 'foobar' not found")
+    end
+  end
+
+  describe :output do
+    it "should return array with formatted values" do
+      expect(person.output).to eq([ 'John', '666', '83,6', '30041975', 'yes' ])
+    end
+
+    it "should pass context to field's output method" do
+      expect(Person.fields[0]).to receive(:output).with('John', 42)
+      person.output(42)
     end
   end
 end

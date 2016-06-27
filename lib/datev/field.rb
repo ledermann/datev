@@ -1,8 +1,8 @@
 module Datev
   class Field
-    attr_accessor :name, :type, :options
+    attr_accessor :name, :type, :options, :block
 
-    def initialize(name, type, options={})
+    def initialize(name, type, options={}, &block)
       unless name.is_a?(String)
         raise ArgumentError.new('Name param has to be a String')
       end
@@ -22,6 +22,10 @@ module Datev
       self.name = name
       self.type = type
       self.options = options
+
+      if block_given?
+        self.instance_eval(&block)
+      end
     end
 
     def required?
@@ -66,7 +70,7 @@ module Datev
       end
     end
 
-    def output(value)
+    def output(value, context=nil)
       return if value.nil?
 
       case type
