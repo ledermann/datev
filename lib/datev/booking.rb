@@ -37,16 +37,28 @@ module Datev
     # ISO-Code beachten (siehe Dok.-Nr.1080170)
 
     # 7
-    field 'Konto', :integer, :limit => 9, :required => true
+    field 'Konto', :integer, :limit => 9, :required => true do
     # Sach- oder Personen-Kontonummer
     # Darf max. 8- bzw. max. 9-stellig sein (abhängig von der Information im Header)
     # Die Personenkontenlänge darf nur 1 Stelle länger sein als die definierte Sachkontennummernlänge.
 
+      def output(value, context)
+        length = context['Sachkontenlänge']
+        value.to_s.rjust(length, '0')
+      end
+    end
+
     # 8
-    field 'Gegenkonto (ohne BU-Schlüssel)', :integer, :limit => 9, :required => true
+    field 'Gegenkonto (ohne BU-Schlüssel)', :integer, :limit => 9, :required => true do
     # Sach- oder Personen-Kontonummer
     # Darf max. 8- bzw. max. 9-stellig sein (abhängig von der Information im Header)
     # Die Personenkontenlänge darf nur 1 Stelle länger sein als die definierte Sachkontennummernlänge.
+
+      def output(value, context)
+        length = context['Sachkontenlänge']
+        value.to_s.rjust(length, '0')
+      end
+    end
 
     # 9
     field 'BU-Schlüssel', :string, :limit => 2
