@@ -11,12 +11,6 @@ describe Datev::Header do
       }.to_not raise_error
     end
 
-    it "should not be allowed without argument" do
-      expect {
-        Datev::Header.new
-      }.to raise_error(ArgumentError)
-    end
-
     it "should not be allowed with unknown field names" do
       expect {
         Datev::Header.new(

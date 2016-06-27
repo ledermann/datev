@@ -6,23 +6,8 @@ module Datev
   class Export
     CSV_OPTIONS = { :col_sep => ';', :encoding => 'windows-1252' }
 
-    DEFAULT_HEADER_ATTRIBUTES = {
-      'DATEV-Format-KZ' => 'EXTF',
-      'Versionsnummer'  => 510,
-      'Datenkategorie'  => 21,
-      'Formatname'      => 'Buchungsstapel',
-      'Formatversion'   => 7,
-      'Erzeugt am'      => Time.now.utc,
-      'Sachkontenlänge' => 4,
-      'Bezeichnung'     => 'Buchungen',
-      'Buchungstyp'     => 1,
-      'WKZ'             => 'EUR'
-    }
-
     def initialize(header_attributes)
-      raise ArgumentError.new('Hash required') unless header_attributes.is_a?(Hash)
-
-      @header = Header.new DEFAULT_HEADER_ATTRIBUTES.merge(header_attributes)
+      @header = Header.new header_attributes
       @rows = []
     end
 
