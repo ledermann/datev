@@ -75,7 +75,7 @@ module Datev
 
       case type
       when :string
-        value
+        value.slice(0, limit || 255)
       when :integer
         value.to_s
       when :decimal

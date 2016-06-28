@@ -50,6 +50,10 @@ describe Datev::Field do
       it "should return unchanged value" do
         expect(field.output('foo')).to eq('foo')
       end
+
+      it "should truncate string to limit" do
+        expect(field.output('1234567')).to eq('123')
+      end
     end
   end
 
