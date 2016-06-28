@@ -2,24 +2,6 @@ require 'datev/base'
 
 module Datev
   class Header < Base
-    DEFAULT_ATTRIBUTES = {
-      'DATEV-Format-KZ' => 'EXTF',
-      'Versionsnummer'  => 510,
-      'Datenkategorie'  => 21,
-      'Formatname'      => 'Buchungsstapel',
-      'Formatversion'   => 7,
-      'Erzeugt am'      => Time.now.utc,
-      'Sachkontenlänge' => 4,
-      'Bezeichnung'     => 'Buchungen',
-      'Buchungstyp'     => 1,
-      'WKZ'             => 'EUR'
-    }
-
-    def initialize(attributes={})
-      raise ArgumentError.new('Hash required') unless attributes.is_a?(Hash)
-      super DEFAULT_ATTRIBUTES.merge(attributes)
-    end
-
     # 1
     field 'DATEV-Format-KZ', :string, :limit => 4
     # vom Datev angegeben
@@ -32,17 +14,14 @@ module Datev
     # 3
     field 'Datenkategorie', :integer, :limit => 2
     # vom Datev angegeben
-    # Buchungsstapel = 21
 
     # 4
     field 'Formatname', :string
     # vom Datev angegeben
-    # 'Buchungsstapel'
 
     # 5
     field 'Formatversion', :integer, :limit => 3
     # vom Datev angegeben
-    # Buchungsstapel = 2
 
     # 6
     field 'Erzeugt am', :date, :format => '%Y%m%d%H%M%S%L'

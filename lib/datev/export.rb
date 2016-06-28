@@ -1,18 +1,21 @@
 require 'csv'
 require 'datev/header'
-require 'datev/booking'
 
 module Datev
   class Export
     CSV_OPTIONS = { :col_sep => ';', :encoding => 'windows-1252' }
 
+    class << self
+      attr_accessor :header_class, :row_class
+    end
+
     def initialize(header_attributes)
-      @header = Header.new header_attributes
+      @header = self.class.header_class.new(header_attributes)
       @rows = []
     end
 
     def <<(attributes)
-      @rows << Datev::Booking.new(attributes)
+      @rows << self.class.row_class.new(attributes)
     end
 
     def to_s
@@ -31,7 +34,7 @@ module Datev
 
     def write(csv)
       csv << @header.output
-      csv << Booking.fields.map(&:name)
+      csv << self.class.row_class.fields.map(&:name)
 
       @rows.each do |row|
         csv << row.output(@header)

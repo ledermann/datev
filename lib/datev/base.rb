@@ -3,10 +3,13 @@ require 'datev/field'
 module Datev
   class Base
     class << self
-      attr_accessor :fields
-    end
+      attr_accessor :fields, :default_attributes
 
-    attr_accessor :attributes
+      def inherited(subclass)
+        subclass.fields             = self.fields
+        subclass.default_attributes = self.default_attributes
+      end
+    end
 
     def self.field(name, type, options={}, &block)
       self.fields ||= []
@@ -23,8 +26,10 @@ module Datev
       self.fields.find { |f| f.name == name }
     end
 
+    attr_accessor :attributes
+
     def initialize(attributes)
-      self.attributes = {}
+      self.attributes = self.class.default_attributes || {}
 
       raise ArgumentError.new('Hash required') unless attributes.is_a?(Hash)
 

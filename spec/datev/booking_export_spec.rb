@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe Datev::Export do
+describe Datev::BookingExport do
   let(:booking1) {
     {
       'Belegdatum'                     => Date.new(2016,6,21),
@@ -27,7 +27,7 @@ describe Datev::Export do
   }
 
   let(:export) do
-    export = Datev::Export.new(
+    export = Datev::BookingExport.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
       'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
@@ -47,7 +47,7 @@ describe Datev::Export do
   describe :initialize do
     it "should accept Hash with valid keys" do
       expect {
-        Datev::Export.new(
+        Datev::BookingExport.new(
           'Berater' => 123,
           'Mandant' => 456
         )
@@ -56,13 +56,13 @@ describe Datev::Export do
 
     it "should accept blank Hash" do
       expect {
-        Datev::Export.new({})
+        Datev::BookingExport.new({})
       }.to_not raise_error
     end
 
     it "should not accept Hash with invalid keys" do
       expect {
-        Datev::Export.new(
+        Datev::BookingExport.new(
           'foo' => 'bar'
         )
       }.to raise_error(ArgumentError, "Field 'foo' not found")
@@ -70,7 +70,7 @@ describe Datev::Export do
 
     it "should not accept other types" do
       expect {
-        Datev::Export.new(42)
+        Datev::BookingExport.new(42)
       }.to raise_error(ArgumentError, "Hash required")
     end
   end

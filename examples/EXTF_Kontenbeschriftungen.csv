@@ -1,0 +1,5 @@
+EXTF;510;20;Kontenbeschriftungen;2;20160623152500000;;XY;Chief Accounting Officer;;123;456;20160101;4;;;Beispiel-Konten;;;;;;;;;
+Konto;Kontenbeschriftung;Sprach-ID
+400;Betriebsausstattung;de-DE
+1000;Kasse;de-DE
+1200;Girokonto;de-DE

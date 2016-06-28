@@ -2,7 +2,7 @@ require 'datev/base'
 
 module Datev
   class Booking < Base
-    # http://www.datev.de/dnlexom/client/app/index.html#/document/1036228
+    # http://www.datev.de/dnlexom/client/app/index.html#/document/1036228/D103622800010
 
     # 1
     field 'Umsatz (ohne Soll/Haben-Kz)', :decimal, :precision => 12, :scale => 2, :required => true

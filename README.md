@@ -25,7 +25,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-export = Datev::Export.new(
+export = Datev::BookingExport.new(
   'Herkunft'        => 'XY',
   'Exportiert von'  => 'Chief Accounting Officer',
   'Berater'         => 123,
