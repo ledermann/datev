@@ -70,7 +70,7 @@ module Datev
       end
     end
 
-    def output(value, context=nil)
+    def output(value, _context=nil)
       return if value.nil?
 
       case type
