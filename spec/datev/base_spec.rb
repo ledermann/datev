@@ -33,6 +33,12 @@ describe Datev::Base do
         Person.field 'name', :string
       }.to raise_error(ArgumentError, "Field 'name' already exists")
     end
+
+    it "should not allow unknown field type" do
+      expect {
+        Person.field 'xy', :foo
+      }.to raise_error(NameError)
+    end
   end
 
   describe :initialize do

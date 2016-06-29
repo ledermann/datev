@@ -2,158 +2,41 @@ require 'spec_helper'
 
 describe Datev::Field do
   describe :initialize do
-    it "should allow valid params" do
-      Datev::Field.new 'foo', :string, :limit => 3
-      Datev::Field.new 'foo', :integer, :limit => 3
-      Datev::Field.new 'foo', :decimal, :precision => 10, :scale => 2
-      Datev::Field.new 'foo', :boolean
-      Datev::Field.new 'foo', :date, :format => '%d%m%Y'
-    end
-
-    it "should not allow invalid params" do
+    it 'should not allow invalid options' do
       expect {
-        Datev::Field.new :foo, :xy
-      }.to raise_error(ArgumentError, 'Name param has to be a String')
+        Datev::Field.new 'foo', 42
+      }.to raise_error(ArgumentError, "Argument 'options' has to be a Hash")
+    end
 
+    it 'should not allow invalid name' do
       expect {
-        Datev::Field.new 'foo', :xy
-      }.to raise_error(ArgumentError, 'Type param not recognized')
-
-      expect {
-        Datev::Field.new 'foo', :string, :bar => 42
-      }.to raise_error(ArgumentError, 'Options param includes unknown key')
-
-      expect {
-        Datev::Field.new 'foo', :string, 42
-      }.to raise_error(ArgumentError, 'Options param has to be a Hash')
+        Datev::Field.new :foo, :limit => 3
+      }.to raise_error(ArgumentError, "Argument 'name' has to be a String")
     end
   end
 
-  context :string do
-    let(:field) { Datev::Field.new 'foo', :string, :limit => 3, :required => true }
+  describe :validate! do
+    context 'for required field' do
+      subject { Datev::Field.new 'foo', :required => true }
 
-    describe :validate! do
-      it "should accept valid value" do
-        expect { field.validate!('Bar') }.to_not raise_error
+      it 'should accept non-nil value' do
+        expect { subject.validate!('bar') }.to_not raise_error
       end
 
-      it "should fail for invalid values" do
-        [ 123, 123.45, true ].each do |value|
-          expect { field.validate!(value)       }.to raise_error(ArgumentError, "Value given for field 'foo' is not a String")
-        end
-        expect { field.validate!('MuchTooLong') }.to raise_error(ArgumentError, "Value 'MuchTooLong' for field 'foo' is too long")
-        expect { field.validate!(nil)           }.to raise_error(ArgumentError, "Value for field 'foo' is required")
+      it 'should fail for nil value' do
+        expect { subject.validate!(nil) }.to raise_error(ArgumentError, "Value for field 'foo' is required")
       end
     end
 
-    describe :output do
-      it "should return unchanged value" do
-        expect(field.output('foo')).to eq('foo')
+    context 'for not-required field' do
+      subject { Datev::Field.new 'foo' }
+
+      it 'should accept non-nil value' do
+        expect { subject.validate!('bar') }.to_not raise_error
       end
 
-      it "should truncate string to limit" do
-        expect(field.output('1234567')).to eq('123')
-      end
-    end
-  end
-
-  context :integer do
-    let(:field) { Datev::Field.new 'foo', :integer, :limit => 3, :required => true }
-
-    describe :validate! do
-      it "should accept valid value" do
-        expect { field.validate!(42) }.to_not raise_error
-      end
-
-      it "should fail for invalid values" do
-        [ '123', 100.5, true ].each do |value|
-          expect { field.validate!(value) }.to raise_error(ArgumentError, "Value given for field 'foo' is not an Integer")
-        end
-        expect { field.validate!(1000)    }.to raise_error(ArgumentError, "Value '1000' for field 'foo' is too long")
-        expect { field.validate!(nil)     }.to raise_error(ArgumentError, "Value for field 'foo' is required")
-      end
-    end
-
-    describe :output do
-      it "should return value as string" do
-        expect(field.output(1)).to eq('1')
-      end
-    end
-  end
-
-  context :decimal do
-    let(:field) { Datev::Field.new 'foo', :decimal, :precision => 6, :scale => 2, :required => true }
-
-    describe :validate! do
-      it "should accept valid value" do
-        expect { field.validate!(12.23)  }.to_not raise_error
-      end
-
-      it "should fail for invalid values" do
-        [ '123', true, Date.new(2016,1,1) ].each do |value|
-          expect { field.validate!(value) }.to raise_error(ArgumentError, "Value given for field 'foo' is not a Decimal")
-        end
-        expect { field.validate!(100000.5)}.to raise_error(ArgumentError, "Value '100000.5' for field 'foo' is too long")
-        expect { field.validate!(nil)     }.to raise_error(ArgumentError, "Value for field 'foo' is required")
-      end
-    end
-
-    describe :output do
-      it "should format" do
-        expect(field.output(1)).to eq('1,00')
-        expect(field.output(10)).to eq('10,00')
-        expect(field.output(1.2)).to eq('1,20')
-        expect(field.output(10.21)).to eq('10,21')
-        expect(field.output(1.238)).to eq('1,24')
-      end
-    end
-  end
-
-  context :date do
-    let(:field) { Datev::Field.new 'foo', :date, :format => "%m%Y", :required => true }
-
-    describe :validate! do
-      it "should accept valid value" do
-        expect { field.validate!(Date.today)  }.to_not raise_error
-        expect { field.validate!(Time.now) }.to_not raise_error
-      end
-
-      it "should fail for invalid values" do
-        [ 1000, '123', 100.5 ].each do |value|
-          expect { field.validate!(value) }.to raise_error(ArgumentError, "Value given for field 'foo' is not a Date or Time")
-        end
-        expect { field.validate!(nil)     }.to raise_error(ArgumentError, "Value for field 'foo' is required")
-      end
-    end
-
-    describe :output do
-      it "should format using option" do
-        expect(field.output(Date.new(2016,3,28))).to eq('032016')
-      end
-    end
-  end
-
-  context :boolean do
-    let(:field) { Datev::Field.new 'foo', :boolean, :required => true }
-
-    describe :validate! do
-      it "should accept valid value" do
-        expect { field.validate!(true)  }.to_not raise_error
-        expect { field.validate!(false) }.to_not raise_error
-      end
-
-      it "should fail for invalid values" do
-        [ 1000, '123', 100.5 ].each do |value|
-          expect { field.validate!(value) }.to raise_error(ArgumentError, "Value given for field 'foo' is not a Boolean")
-        end
-        expect { field.validate!(nil)     }.to raise_error(ArgumentError, "Value for field 'foo' is required")
-      end
-    end
-
-    describe :output do
-      it "should return 0 or 1" do
-        expect(field.output(true)).to eq(1)
-        expect(field.output(false)).to eq(0)
+      it 'should accept nil value' do
+        expect { subject.validate!(nil) }.to_not raise_error
       end
     end
   end
