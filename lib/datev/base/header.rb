@@ -1,5 +1,3 @@
-require 'datev/base'
-
 module Datev
   class Header < Base
     # 1

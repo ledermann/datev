@@ -1,5 +1,3 @@
-require 'datev/base'
-
 module Datev
   class Booking < Base
     # http://www.datev.de/dnlexom/client/app/index.html#/document/1036228/D103622800010

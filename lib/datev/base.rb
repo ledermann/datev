@@ -1,9 +1,3 @@
-require 'datev/field/string_field'
-require 'datev/field/integer_field'
-require 'datev/field/boolean_field'
-require 'datev/field/decimal_field'
-require 'datev/field/date_field'
-
 module Datev
   class Base
     class << self

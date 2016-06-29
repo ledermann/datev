@@ -1,5 +1,3 @@
-require 'datev/base'
-
 module Datev
   class AccountHeader < Header
     self.default_attributes = {

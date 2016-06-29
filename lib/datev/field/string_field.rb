@@ -1,5 +1,3 @@
-require 'datev/field'
-
 module Datev
   class StringField < Field
     def limit

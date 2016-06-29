@@ -1,5 +1,3 @@
-require 'datev/field'
-
 module Datev
   class DateField < Field
     def format

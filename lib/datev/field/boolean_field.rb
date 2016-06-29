@@ -1,5 +1,3 @@
-require 'datev/field'
-
 module Datev
   class BooleanField < Field
     def validate!(value)

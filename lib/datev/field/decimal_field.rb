@@ -1,5 +1,3 @@
-require 'datev/field'
-
 module Datev
   class DecimalField < Field
     def precision

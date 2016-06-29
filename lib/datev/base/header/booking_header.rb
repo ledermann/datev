@@ -1,5 +1,3 @@
-require 'datev/base'
-
 module Datev
   class BookingHeader < Header
     self.default_attributes = {

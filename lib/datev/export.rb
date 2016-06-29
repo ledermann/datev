@@ -1,6 +1,3 @@
-require 'csv'
-require 'datev/base/header'
-
 module Datev
   class Export
     CSV_OPTIONS = { :col_sep => ';', :encoding => 'windows-1252' }
