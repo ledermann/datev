@@ -20,12 +20,6 @@ describe Datev::Booking do
         Datev::Booking.new 'Umsatz (ohne Soll/Haben-Kz)' => 100.12
       }.to raise_error(ArgumentError, "Value for field 'Soll/Haben-Kennzeichen' is required but missing")
     end
-
-    it "should not be allowed for unknown fields names" do
-      expect {
-        Datev::Booking.new 'Umsatz' => 100.12
-      }.to raise_error(ArgumentError, "Field 'Umsatz' not found")
-    end
   end
 
   describe :output, 'account numbers' do
