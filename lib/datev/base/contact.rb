@@ -1,5 +1,34 @@
 module Datev
   class Contact < Base
+    def self.bank_account(number)
+      field "Bankleitzahl #{number}", :string, :limit => 8
+
+      field "Bankbezeichnung #{number}", :string, :limit => 30
+
+      field "Bankkonto-Nummer #{number}", :string, :limit => 10
+
+      field "Länderkennzeichen #{number}", :string, :limit => 2
+      # ISO-Code beachten (siehe Dok.-Nr. 1080169)
+
+      field "IBAN #{number}", :string, :limit => 34
+
+      field "Leerfeld #{number}", :integer, :limit => 1
+
+      field "SWIFT-Code #{number}", :string, :limit => 11
+      # Beachten Sie, dass für Zahlung und Lastschriften bis zur Installation der Programm-DVD DATEV pro 8.3 (Januar 2015) BLZ und/oder BIC noch erforderlich sind.
+
+      field "Abw. Kontoinhaber #{number}", :string, :limit => 70
+
+      field "Kennz. Haupt-Bankverb. #{number}", :boolean
+      # Kennzeichnung als Haupt-Bankverbindung
+      # 1 = Ja
+      # 0 = Nein
+      # Nur eine Bankverbindung eines Debitoren oder Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden.
+
+      field "Bankverb. #{number} Gültig von", :date, :format => '%d%m%Y'
+      field "Bankverb. #{number} Gültig bis", :date, :format => '%d%m%Y'
+    end
+
     # http://www.datev.de/dnlexom/client/app/index.html#/document/1036228/D103622800012
 
     # 1
@@ -153,32 +182,7 @@ module Datev
 
     # 41 bis 95
     (1..5).each do |number|
-      field "Bankleitzahl #{number}", :string, :limit => 8
-
-      field "Bankbezeichnung #{number}", :string, :limit => 30
-
-      field "Bankkonto-Nummer #{number}", :string, :limit => 10
-
-      field "Länderkennzeichen #{number}", :string, :limit => 2
-      # ISO-Code beachten (siehe Dok.-Nr. 1080169)
-
-      field "IBAN #{number}", :string, :limit => 34
-
-      field "Leerfeld #{number}", :integer, :limit => 1
-
-      field "SWIFT-Code #{number}", :string, :limit => 11
-      # Beachten Sie, dass für Zahlung und Lastschriften bis zur Installation der Programm-DVD DATEV pro 8.3 (Januar 2015) BLZ und/oder BIC noch erforderlich sind.
-
-      field "Abw. Kontoinhaber #{number}", :string, :limit => 70
-
-      field "Kennz. Haupt-Bankverb. #{number}", :boolean
-      # Kennzeichnung als Haupt-Bankverbindung
-      # 1 = Ja
-      # 0 = Nein
-      # Nur eine Bankverbindung eines Debitoren oder Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden.
-
-      field "Bankverb. #{number} Gültig von", :date, :format => '%d%m%Y'
-      field "Bankverb. #{number} Gültig bis", :date, :format => '%d%m%Y'
+      self.bank_account(number)
     end
 
     # 96
@@ -417,32 +421,7 @@ module Datev
 
     # 165 bis 219
     (6..10).each do |number|
-      field "Bankleitzahl #{number}", :string, :limit => 8
-
-      field "Bankbezeichnung #{number}", :string, :limit => 30
-
-      field "Bankkonto-Nummer #{number}", :string, :limit => 10
-
-      field "Länderkennzeichen #{number}", :string, :limit => 2
-      # ISO-Code beachten (siehe Dok.-Nr. 1080169)
-
-      field "IBAN #{number}", :string, :limit => 34
-
-      field "Leerfeld #{number}", :integer, :limit => 1
-
-      field "SWIFT-Code #{number}", :string, :limit => 11
-      # Beachten Sie, dass für Zahlung und Lastschriften bis zur Installation der Programm-DVD DATEV pro 8.3 (Januar 2015) BLZ und/oder BIC noch erforderlich sind.
-
-      field "Abw. Kontoinhaber #{number}", :string, :limit => 70
-
-      field "Kennz. Haupt-Bankverb. #{number}", :boolean
-      # Kennzeichnung als Haupt-Bankverbindung
-      # 1 = Ja
-      # 0 = Nein
-      # Nur eine Bankverbindung eines Debitoren oder Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden.
-
-      field "Bankverb. #{number} Gültig von", :date, :format => '%d%m%Y'
-      field "Bankverb. #{number} Gültig bis", :date, :format => '%d%m%Y'
+      bank_account(number)
     end
 
     # 220
