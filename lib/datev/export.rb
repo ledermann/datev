@@ -18,7 +18,7 @@ module Datev
     def to_s
       CSV.generate(CSV_OPTIONS) do |csv|
         write(csv)
-      end.encode(Encoding::WINDOWS_1252)
+      end
     end
 
     def to_file(filename)
