@@ -45,7 +45,7 @@ describe Datev::ContactExport do
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
       'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
-      'Berater'         => 123,
+      'Berater'         => 1001,
       'Mandant'         => 456,
       'WJ-Beginn'       => Date.new(2016,1,1),
       'Bezeichnung'     => 'Kunden und Lieferanten'

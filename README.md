@@ -28,7 +28,7 @@ Or install it yourself as:
 export = Datev::BookingExport.new(
   'Herkunft'        => 'XY',
   'Exportiert von'  => 'Chief Accounting Officer',
-  'Berater'         => 123,
+  'Berater'         => 1001,
   'Mandant'         => 456,
   'WJ-Beginn'       => Date.new(2016,1,1),
   'Datum vom'       => Date.new(2016,6,1),

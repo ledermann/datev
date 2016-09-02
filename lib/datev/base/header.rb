@@ -42,7 +42,7 @@ module Datev
     # Darf nicht gefüllt werden, durch Import gesetzt.
 
     # 11
-    field 'Berater', :integer, :limit => 7
+    field 'Berater', :integer, :limit => 7, :minimum => 1001
     # Beraternummer
 
     # 12

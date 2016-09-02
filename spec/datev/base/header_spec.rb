@@ -5,7 +5,7 @@ describe Datev::Header do
     it "should be allowed with defined fields" do
       expect {
         Datev::Header.new(
-          'Berater' => 123,
+          'Berater' => 1001,
           'Mandant' => 456
           )
       }.to_not raise_error

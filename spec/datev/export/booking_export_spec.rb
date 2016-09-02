@@ -31,7 +31,7 @@ describe Datev::BookingExport do
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
       'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
-      'Berater'         => 123,
+      'Berater'         => 1001,
       'Mandant'         => 456,
       'WJ-Beginn'       => Date.new(2016,1,1),
       'Datum vom'       => Date.new(2016,6,1),
@@ -48,7 +48,7 @@ describe Datev::BookingExport do
     it "should accept Hash with valid keys" do
       expect {
         Datev::BookingExport.new(
-          'Berater' => 123,
+          'Berater' => 1001,
           'Mandant' => 456
         )
       }.to_not raise_error
