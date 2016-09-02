@@ -91,5 +91,21 @@ module Datev
     field 'reserviert 3', :string
     field 'reserviert 4', :string
     field 'reserviert 5', :string
+
+    # 27
+    field 'SKR', :string
+
+    # 28
+    field 'Branchenlösung-Id', :integer
+
+    # 29
+    field 'reserviert 6', :integer
+
+    # 30
+    field 'reserviert 7', :string
+
+    # 31
+    field 'Anwendungsinformation', :string, :limit => 16
+    # Verarbeitungskennzeichen der abgebenden Anwendung => Bsp. '9/2016'
   end
 end
