@@ -20,5 +20,3 @@ require 'datev/export'
 require 'datev/export/account_export'
 require 'datev/export/contact_export'
 require 'datev/export/booking_export'
-
-require 'csv'

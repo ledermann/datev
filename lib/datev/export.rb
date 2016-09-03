@@ -16,26 +16,26 @@ module Datev
     end
 
     def to_s
-      CSV.generate(CSV_OPTIONS) do |csv|
-        write(csv)
+      string = to_csv_line(@header.output) <<
+               to_csv_line(self.class.row_class.fields.map(&:name))
+
+      @rows.each do |row|
+        string << to_csv_line(row.output(@header))
       end
+
+      string.encode(CSV_OPTIONS[:encoding])
     end
 
     def to_file(filename)
-      CSV.open(filename, 'wb', CSV_OPTIONS) do |csv|
-        write(csv)
+      File.open(filename, 'wb') do |file|
+        file.write(to_s)
       end
     end
 
   private
 
-    def write(csv)
-      csv << @header.output
-      csv << self.class.row_class.fields.map(&:name)
-
-      @rows.each do |row|
-        csv << row.output(@header)
-      end
+    def to_csv_line(data)
+      data.join(CSV_OPTIONS[:col_sep]) + "\n"
     end
   end
 end
