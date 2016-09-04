@@ -14,7 +14,18 @@ module Datev
     end
 
     def output(value, _context=nil)
-      value.slice(0, limit || 255) if value
+      value = value.slice(0, limit || 255) if value
+
+      quote(value)
+    end
+
+  private
+
+    def quote(value)
+      # Existing quotes have to be doubled
+      value = value.gsub('"','""') if value
+
+      "\"#{value}\""
     end
   end
 end
