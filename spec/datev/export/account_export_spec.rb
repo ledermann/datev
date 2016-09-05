@@ -55,7 +55,7 @@ describe Datev::AccountExport do
     end
 
     it "should contain header" do
-      expect(subject.lines[0]).to include('EXTF;510')
+      expect(subject.lines[0]).to include('"EXTF";510')
     end
 
     it "should contain field names" do
@@ -63,9 +63,9 @@ describe Datev::AccountExport do
     end
 
     it "should contain accounts" do
-      expect(subject.lines[2]).to include('400;Betriebsausstattung')
-      expect(subject.lines[3]).to include('1000;Kasse')
-      expect(subject.lines[4]).to include('1200;Girokonto')
+      expect(subject.lines[2]).to include('400;"Betriebsausstattung"')
+      expect(subject.lines[3]).to include('1000;"Kasse"')
+      expect(subject.lines[4]).to include('1200;"Girokonto"')
     end
   end
 

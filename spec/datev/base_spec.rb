@@ -91,7 +91,7 @@ describe Datev::Base do
 
   describe :output do
     it "should return array with formatted values" do
-      expect(person.output).to eq([ 'John', '666', '83,6', '30041975', 'yes' ])
+      expect(person.output).to eq([ '"John"', '666', '83,6', '30041975', 'yes' ])
     end
 
     it "should pass context to field's output method" do
