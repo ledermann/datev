@@ -23,7 +23,7 @@ module Datev
         string << to_csv_line(row.output(@header))
       end
 
-      string.encode(CSV_OPTIONS[:encoding])
+      string.encode(CSV_OPTIONS[:encoding], invalid: :replace, undef: :replace, replace: ' ')
     end
 
     def to_file(filename)

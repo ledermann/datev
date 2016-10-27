@@ -39,6 +39,14 @@ describe Datev::ContactExport do
       'Adressatentyp'                    => '2'
     }
   }
+  
+  let(:contact4) {
+    {
+      'Konto'                            => 70003,
+      'Name (Adressatentyp Unternehmen)' => 'Scary Kitten🙀 AG',
+      'Adressatentyp'                    => '2'
+    }
+  }
 
   let(:export) do
     export = Datev::ContactExport.new(
@@ -54,6 +62,7 @@ describe Datev::ContactExport do
     export << contact1
     export << contact2
     export << contact3
+    export << contact4
     export
   end
 
@@ -62,7 +71,7 @@ describe Datev::ContactExport do
 
     it 'should export as string' do
       expect(subject).to be_a(String)
-      expect(subject.lines.length).to eq(5)
+      expect(subject.lines.length).to eq(6)
     end
 
     it "should encode in Windows-1252" do
@@ -81,6 +90,10 @@ describe Datev::ContactExport do
       expect(subject.lines[2]).to include('10000;"";"";"Mustermann"')
       expect(subject.lines[3]).to include('70001;"Meyer GmbH"')
       expect(subject.lines[4]).to include('70002;"Schulze GmbH"')
+    end
+    
+    it "should replace non-convertible characters by spaces" do
+      expect(subject.lines[5]).to include('70003;"Scary Kitten  AG"')
     end
   end
 
