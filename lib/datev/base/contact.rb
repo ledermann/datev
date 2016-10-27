@@ -12,7 +12,7 @@ module Datev
 
       field "IBAN #{number}", :string, :limit => 34
 
-      field "Leerfeld #{number}", :integer, :limit => 1
+      field "Leerfeld #{number}", :string, :limit => 1
 
       field "SWIFT-Code #{number}", :string, :limit => 11
       # Beachten Sie, dass für Zahlung und Lastschriften bis zur Installation der Programm-DVD DATEV pro 8.3 (Januar 2015) BLZ und/oder BIC noch erforderlich sind.
@@ -254,12 +254,16 @@ module Datev
 
     # 112 bis 120
     (1..5).each do |number|
-      field "Kreditoren-Ziel #{number} (Tage)", :integer, :limit => 2
-      # Nur für Kreditoren gültig
+      if 3 == number
+        field "Kreditoren-Ziel #{number} Brutto (Tage)", :integer, :limit => 3
+      else
+        field "Kreditoren-Ziel #{number} (Tage)", :integer, :limit => 2
+        # Nur für Kreditoren gültig
 
-      field "Kreditoren-Skonto #{number} (%)", :decimal, :precision => 4, :scale => 2
-      # Nur für Kreditoren gültig
-      # Beispiel: 12,12
+        field "Kreditoren-Skonto #{number} (%)", :decimal, :precision => 4, :scale => 2
+        # Nur für Kreditoren gültig
+        # Beispiel: 12,12
+      end
     end
 
     # 121
