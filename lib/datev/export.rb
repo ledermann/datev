@@ -35,7 +35,7 @@ module Datev
   private
 
     def to_csv_line(data)
-      data.join(CSV_OPTIONS[:col_sep]) + "\n"
+      data.join(CSV_OPTIONS[:col_sep]) + "\r\n"
     end
   end
 end
