@@ -36,7 +36,8 @@ describe Datev::BookingExport do
       'WJ-Beginn'       => Date.new(2016,1,1),
       'Datum vom'       => Date.new(2016,6,1),
       'Datum bis'       => Date.new(2016,6,30),
-      'Bezeichnung'     => 'Beispiel-Buchungen'
+      'Bezeichnung'     => 'Beispiel-Buchungen',
+      'Festschreibung'  => false
     )
 
     export << booking1

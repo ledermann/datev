@@ -80,17 +80,26 @@ module Datev
     # 0 oder leer = Rechnungslegungszweckunabhängig
 
     # 21
-    field 'reserviert', :integer
+    field 'Festschreibung', :boolean
+    # leer = nicht definiert; wird ab Jahreswechselversion 2016/2017 automatisch festgeschrieben
+    # 0 = keine Festschreibung
+    # 1 = Festschreibung
 
     # 22
     field 'WKZ', :string, :limit => 3
     # Währungskennzeichen
 
-    # 23 - 26
+    # 23
+    field 'reserviert', :string
+
+    # 24
+    field 'Derivatskennzeichen', :string
+
+    # 25
     field 'reserviert 2', :string
+
+    # 26
     field 'reserviert 3', :string
-    field 'reserviert 4', :string
-    field 'reserviert 5', :string
 
     # 27
     field 'SKR', :string
@@ -99,10 +108,10 @@ module Datev
     field 'Branchenlösung-Id', :integer
 
     # 29
-    field 'reserviert 6', :integer
+    field 'reserviert 4', :integer
 
     # 30
-    field 'reserviert 7', :string
+    field 'reserviert 5', :string
 
     # 31
     field 'Anwendungsinformation', :string, :limit => 16
