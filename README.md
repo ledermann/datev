@@ -1,6 +1,8 @@
 # Datev
 
-Ruby gem for exporting bookings to DATEV via CSV file
+Ruby gem to export bookings and more to DATEV format as CSV file
+
+Supported DATEV Version: 5.1
 
 [![Build Status](https://travis-ci.org/ledermann/datev.svg?branch=master)](https://travis-ci.org/ledermann/datev)
 [![Code Climate](https://codeclimate.com/github/ledermann/datev/badges/gpa.svg)](https://codeclimate.com/github/ledermann/datev)
@@ -24,6 +26,8 @@ Or install it yourself as:
 
 ## Usage
 
+To export bookings, you need an BookingExport instance with an array of records. Example:
+
 ```ruby
 export = Datev::BookingExport.new(
   'Herkunft'        => 'XY',
@@ -34,7 +38,7 @@ export = Datev::BookingExport.new(
   'Datum vom'       => Date.new(2016,6,1),
   'Datum bis'       => Date.new(2016,6,30),
   'Bezeichnung'     => 'Beispiel-Buchungen'
-) # For available hash keys see /lib/datev/header.rb
+) # For available hash keys see /lib/datev/base/header.rb
 
 export << {
   'Belegdatum'                     => Date.new(2016,6,21),
@@ -44,7 +48,7 @@ export << {
   'Konto'                          => 1200,
   'Gegenkonto (ohne BU-Schlüssel)' => 4940,
   'BU-Schlüssel'                   => '8'
-} # For available hash keys see /lib/datev/booking.rb
+} # For available hash keys see /lib/datev/base/booking.rb
 
 export << {
   'Belegdatum'                     => Date.new(2016,6,22),
@@ -60,6 +64,14 @@ export.to_file('EXTF_Buchungsstapel.csv')
 ```
 
 Result: [CSV file](examples/EXTF_Buchungsstapel.csv)
+
+All records are validated against the defined schema.
+
+Beside bookings, some other exports are available, too:
+
+* `AccountExport` ("Kontenbeschriftungen")
+* `ContactExport` ("Stammdaten")
+
 
 ## Development
 
