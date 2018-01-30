@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::BooleanField do
-  subject { Datev::BooleanField.new 'foo', :required => true }
+  subject { Datev::BooleanField.new 'foo', required: true }
 
   describe :validate! do
     it 'should accept valid value' do

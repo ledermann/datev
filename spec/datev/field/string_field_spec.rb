@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::StringField do
-  subject { Datev::StringField.new 'foo', :limit => 9, :required => true }
+  subject { Datev::StringField.new 'foo', limit: 9, required: true }
 
   describe :validate! do
     it "should accept valid value" do

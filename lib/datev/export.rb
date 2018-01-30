@@ -1,6 +1,6 @@
 module Datev
   class Export
-    CSV_OPTIONS = { :col_sep => ';', :encoding => 'windows-1252' }
+    CSV_OPTIONS = { col_sep: ';', encoding: 'windows-1252' }
 
     class << self
       attr_accessor :header_class, :row_class

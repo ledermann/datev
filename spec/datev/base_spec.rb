@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 class Person < Datev::Base
-  field 'name',            :string, :limit => 30, :required => true
-  field 'favorite number', :integer, :limit => 10
-  field 'weight',          :decimal, :precision => 4, :scale => 1
-  field 'birthday',        :date, :format => '%d%m%Y'
+  field 'name',            :string, limit: 30, required: true
+  field 'favorite number', :integer, limit: 10
+  field 'weight',          :decimal, precision: 4, scale: 1
+  field 'birthday',        :date, format: '%d%m%Y'
   field 'alive',           :boolean do
     def output(value, context)
       value ? 'yes' : 'no'

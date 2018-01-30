@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::IntegerField do
-  subject { Datev::IntegerField.new 'foo', :limit => 3, :minimum => 5, :maximum => 500, :required => true }
+  subject { Datev::IntegerField.new 'foo', limit: 3, minimum: 5, maximum: 500, required: true }
 
   describe :validate! do
     it "should accept valid value" do

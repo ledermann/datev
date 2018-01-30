@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::DecimalField do
-  subject { Datev::DecimalField.new 'foo', :precision => 6, :scale => 2, :required => true }
+  subject { Datev::DecimalField.new 'foo', precision: 6, scale: 2, required: true }
 
   describe :validate! do
     it "should accept valid value" do

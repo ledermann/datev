@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::DateField do
-  subject { Datev::DateField.new 'foo', :format => "%m%Y", :required => true }
+  subject { Datev::DateField.new 'foo', format: "%m%Y", required: true }
 
   describe :validate! do
     it "should accept valid value" do

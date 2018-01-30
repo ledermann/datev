@@ -10,14 +10,14 @@ describe Datev::Field do
 
     it 'should not allow invalid name' do
       expect {
-        Datev::Field.new :foo, :limit => 3
+        Datev::Field.new :foo, limit: 3
       }.to raise_error(ArgumentError, "Argument 'name' has to be a String")
     end
   end
 
   describe :validate! do
     context 'for required field' do
-      subject { Datev::Field.new 'foo', :required => true }
+      subject { Datev::Field.new 'foo', required: true }
 
       it 'should accept non-nil value' do
         expect { subject.validate!('bar') }.to_not raise_error
