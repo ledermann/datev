@@ -198,8 +198,8 @@ module Datev
 
     # 48 bis 87
     (1..20).each do |number|
-      field "Zusatzinformation – Inhalt #{number}", :string, limit: 210
       field "Zusatzinformation – Art #{number}", :string, limit: 20
+      field "Zusatzinformation – Inhalt #{number}", :string, limit: 210
     end
     # Zusatzinformationen, die zu Buchungssätzen erfasst werden können.
     # Diese Zusatzinformationen besitzen den Charakter eines Notizzettels und können frei erfasst werden.
