@@ -34,14 +34,14 @@ export = Datev::BookingExport.new(
   'Exportiert von'  => 'Chief Accounting Officer',
   'Berater'         => 1001,
   'Mandant'         => 456,
-  'WJ-Beginn'       => Date.new(2016,1,1),
-  'Datum vom'       => Date.new(2016,6,1),
-  'Datum bis'       => Date.new(2016,6,30),
+  'WJ-Beginn'       => Date.new(2018,1,1),
+  'Datum vom'       => Date.new(2018,2,1),
+  'Datum bis'       => Date.new(2018,2,28),
   'Bezeichnung'     => 'Beispiel-Buchungen'
 ) # For available hash keys see /lib/datev/base/header.rb
 
 export << {
-  'Belegdatum'                     => Date.new(2016,6,21),
+  'Belegdatum'                     => Date.new(2018,2,21),
   'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
   'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
   'Soll/Haben-Kennzeichen'         => 'H',
@@ -51,13 +51,13 @@ export << {
 } # For available hash keys see /lib/datev/base/booking.rb
 
 export << {
-  'Belegdatum'                     => Date.new(2016,6,22),
+  'Belegdatum'                     => Date.new(2018,2,22),
   'Buchungstext'                   => 'Honorar FiBu-Seminar',
   'Umsatz (ohne Soll/Haben-Kz)'    => 5950.00,
   'Soll/Haben-Kennzeichen'         => 'S',
   'Konto'                          => 10000,
   'Gegenkonto (ohne BU-Schlüssel)' => 8400,
-  'Belegfeld 1'                    => 'RE201606-135'
+  'Belegfeld 1'                    => 'RE201802-135'
 }
 
 export.to_file('EXTF_Buchungsstapel.csv')

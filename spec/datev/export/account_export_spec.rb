@@ -29,10 +29,10 @@ describe Datev::AccountExport do
     export = Datev::AccountExport.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
-      'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
+      'Erzeugt am'      => Time.new(2018,2,23,15,25,0, '+02:00'),
       'Berater'         => 1001,
       'Mandant'         => 456,
-      'WJ-Beginn'       => Date.new(2016,1,1),
+      'WJ-Beginn'       => Date.new(2018,1,1),
       'Bezeichnung'     => 'Beispiel-Konten'
     )
 

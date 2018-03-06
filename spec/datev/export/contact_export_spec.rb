@@ -39,7 +39,7 @@ describe Datev::ContactExport do
       'Adressatentyp'                    => '2'
     }
   }
-  
+
   let(:contact4) {
     {
       'Konto'                            => 70003,
@@ -52,10 +52,10 @@ describe Datev::ContactExport do
     export = Datev::ContactExport.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
-      'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
+      'Erzeugt am'      => Time.new(2018,3,6,10,25,0, '+02:00'),
       'Berater'         => 1001,
       'Mandant'         => 456,
-      'WJ-Beginn'       => Date.new(2016,1,1),
+      'WJ-Beginn'       => Date.new(2018,1,1),
       'Bezeichnung'     => 'Kunden und Lieferanten'
     )
 
@@ -91,7 +91,7 @@ describe Datev::ContactExport do
       expect(subject.lines[3]).to include('70001;"Meyer GmbH"')
       expect(subject.lines[4]).to include('70002;"Schulze GmbH"')
     end
-    
+
     it "should replace non-convertible characters by spaces" do
       expect(subject.lines[5]).to include('70003;"Scary Kitten  AG"')
     end

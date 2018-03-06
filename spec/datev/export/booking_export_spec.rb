@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Datev::BookingExport do
   let(:booking1) {
     {
-      'Belegdatum'                     => Date.new(2016,6,21),
+      'Belegdatum'                     => Date.new(2018,2,21),
       'Buchungstext'                   => 'Fachbuch: Controlling für Dummies',
       'Umsatz (ohne Soll/Haben-Kz)'    => 24.95,
       'Soll/Haben-Kennzeichen'         => 'H',
@@ -16,13 +16,13 @@ describe Datev::BookingExport do
 
   let(:booking2) {
     {
-      'Belegdatum'                     => Date.new(2016,6,22),
+      'Belegdatum'                     => Date.new(2018,2,22),
       'Buchungstext'                   => 'Honorar FiBu-Seminar',
       'Umsatz (ohne Soll/Haben-Kz)'    => 5950.00,
       'Soll/Haben-Kennzeichen'         => 'S',
       'Konto'                          => 10000,
       'Gegenkonto (ohne BU-Schlüssel)' => 8400,
-      'Belegfeld 1'                    => 'RE201606-135'
+      'Belegfeld 1'                    => 'RE201802-135'
     }
   }
 
@@ -30,12 +30,12 @@ describe Datev::BookingExport do
     export = Datev::BookingExport.new(
       'Herkunft'        => 'XY',
       'Exportiert von'  => 'Chief Accounting Officer',
-      'Erzeugt am'      => Time.new(2016,6,23,15,25,0, '+02:00'),
+      'Erzeugt am'      => Time.new(2018,3,6,10,25,0, '+02:00'),
       'Berater'         => 1001,
       'Mandant'         => 456,
-      'WJ-Beginn'       => Date.new(2016,1,1),
-      'Datum vom'       => Date.new(2016,6,1),
-      'Datum bis'       => Date.new(2016,6,30),
+      'WJ-Beginn'       => Date.new(2018,1,1),
+      'Datum vom'       => Date.new(2018,2,1),
+      'Datum bis'       => Date.new(2018,2,28),
       'Bezeichnung'     => 'Beispiel-Buchungen',
       'Festschreibung'  => false
     )
