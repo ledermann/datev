@@ -122,9 +122,19 @@ module Datev
     # 20
     field 'Beleglink', :string, limit: 210
     # Link auf den Buchungsbeleg, der digital in einem Dokumenten-Management-System (z. B. DATEV Dokumentenablage, DATEV DMS classic) abgelegt wurde.
-    # Beispiel für eine Beleg-ID eines Belegs aus DATEV Unternehmen online:
-    # CB6A8F8F-099A-B3A9-2BAA-0CB64E299BA
-    # (32 von 36 möglichen Zeichen)
+    # Der Beleglink hat folgenden Aufbau:
+    #   4-stelliges Kürzel für Dokumentenmanagementsystem (siehe unten)
+    #   Leerzeichen
+    #   Anführungszeichen
+    #   Beleglink (GUID, Dateiname des Belegs), max. 36 Zeichen
+    #   Schlusszeichen
+    # Beispiel für einen Beleglink aus Belege online:
+    # BEDI “CB6A8F8F-099A-B3A9-2BAA-0CB64E299BA”
+    # Das Kürzel bezeichnet das Quellsystem (Dokumentenmanagement), indem die digitalen Belege abgelegt sind.
+    # DATEV verwendet für seine Dokumentenmanagement-Systeme folgende Kürzel:
+    #   Belegverwaltung online → BEDI
+    #   DATEV DMS → DDMS
+    #   Dokumentenablage → DDMS (vormals DORG)
 
     # 21 bis 36
     (1..8).each do |number|
