@@ -147,6 +147,9 @@ describe Datev::BookingExport do
       Dir.mktmpdir do |dir|
         filename = "#{dir}/EXTF_Buchungsstapel.csv"
         export.to_file(filename)
+        if ENV['CREATE_EXAMPLES']
+          export.to_file('examples/EXTF_Buchungsstapel.csv')
+        end
 
         expect(IO.read(filename)).to eq(IO.read('examples/EXTF_Buchungsstapel.csv'))
       end

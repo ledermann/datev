@@ -85,6 +85,9 @@ describe Datev::AccountExport do
       Dir.mktmpdir do |dir|
         filename = "#{dir}/EXTF_Kontenbeschriftungen.csv"
         export.to_file(filename)
+        if ENV['CREATE_EXAMPLES']
+          export.to_file('examples/EXTF_Kontenbeschriftungen.csv')
+        end
 
         expect(IO.read(filename)).to eq(IO.read('examples/EXTF_Kontenbeschriftungen.csv'))
       end

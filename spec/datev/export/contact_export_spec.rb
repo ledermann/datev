@@ -113,6 +113,9 @@ describe Datev::ContactExport do
       Dir.mktmpdir do |dir|
         filename = "#{dir}/EXTF_Stammdaten.csv"
         export.to_file(filename)
+        if ENV['CREATE_EXAMPLES']
+          export.to_file('examples/EXTF_Stammdaten.csv')
+        end
 
         expect(IO.read(filename)).to eq(IO.read('examples/EXTF_Stammdaten.csv'))
       end
