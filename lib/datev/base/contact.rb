@@ -481,5 +481,35 @@ module Datev
       field "Verzugspauschale #{number}", :decimal, precision: 5, scale: 2
       # Beispiel: 12,12
     end
+
+    # 244
+    field 'Alternativer Suchname', :string, limit: 50
+
+    # 245
+    field 'Status', :integer, limit: 1
+
+    # 246
+    field 'Anschrift manuell geändert (Korrespondenzadresse)', :integer, limit: 1
+
+    # 247
+    field 'Anschrift individuell (Korrespondenzadresse)', :string, limit: 306
+
+    # 248
+    field 'Anschrift manuell geändert (Rechnungsadresse)', :integer, limit: 1
+
+    # 249
+    field 'Anschrift individuell (Rechnungsadresse)', :string, limit: 306
+
+    # 250
+    field 'Fristberechnung bei Debitor', :integer, limit: 1
+    # 0 = nein
+    # 1 = ja
+
+    # 251 bis 253
+    (1..3).each do |number|
+      field "Mahnfrist #{number}", :integer, limit: 3
+      # Mahnfristen in Tagen
+    end
+
   end
 end
