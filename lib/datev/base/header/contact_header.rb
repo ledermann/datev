@@ -2,7 +2,7 @@ module Datev
   class ContactHeader < Header
     self.default_attributes = {
       'DATEV-Format-KZ' => 'EXTF',
-      'Versionsnummer'  => 510,
+      'Versionsnummer'  => 720,
       'Datenkategorie'  => 16,
       'Formatname'      => 'Debitoren/Kreditoren',
       'Formatversion'   => 4,
