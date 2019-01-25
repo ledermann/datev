@@ -511,5 +511,8 @@ module Datev
       # Mahnfristen in Tagen
     end
 
+    # 254
+    field 'Letzte Frist', :integer, limit: 3
+    # Mahnfristen in Tagen
   end
 end
