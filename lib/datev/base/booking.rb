@@ -347,5 +347,23 @@ module Datev
     # 116
     field 'Datum Zuord.', :date, format: '%d%m%Y'
     # Steuerperiode
+
+    # Neue Felder ab Programmversion 7.1
+
+    # 117
+    field 'Fälligkeit', :date, format: '%d%m%Y'
+    # OPOS Informationen
+
+    # 118
+    field 'Generalumkehr', :string, limit: 1
+    # 1 = Generalumkehr
+    # 0 = keine Generalumkehr
+
+    # 119
+    field 'Steuersatz', :decimal, precision: 4, scale: 2
+
+    # 120
+    field 'Land', :string, limit: 2
+    # Beispiel: DE für Deutschland
   end
 end
