@@ -59,7 +59,7 @@ module Datev
     end
 
     # 9
-    field 'BU-Schlüssel', :string, limit: 2
+    field 'BU-Schlüssel', :string, limit: 4
     # Steuerschlüssel und/oder Berichtigungsschlüssel
 
     # 10
