@@ -16,6 +16,8 @@ describe Datev::StringField do
       expect { subject.validate!(nil)           }.to raise_error(ArgumentError, "Value for field 'foo' is required")
 
       expect { subject.validate!('Ömläüte')     }.to raise_error(ArgumentError, "Value 'Ömläüte' for field 'foo' does not match regex")
+      expect { subject.validate!('RE.1234')     }.to raise_error(ArgumentError, "Value 'RE.1234' for field 'foo' does not match regex")
+      expect { subject.validate!('RE_1234')     }.to raise_error(ArgumentError, "Value 'RE_1234' for field 'foo' does not match regex")
     end
   end
 

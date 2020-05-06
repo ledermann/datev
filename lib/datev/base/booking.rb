@@ -73,7 +73,7 @@ module Datev
     # Bei einer Zahlung oder Gutschrift erfolgt nur dann ein OP-Ausgleich, wenn die Belegnummer mit dem Belegfeld 1 identisch ist.
 
     # 12
-    field 'Belegfeld 2', :string, limit: 12
+    field 'Belegfeld 2', :string, limit: 12, regex: %r{\A[a-zA-Z0-9\$\&\%\*\+\-\/]*\z}
     # Belegnummer oder OPOS-Verarbeitungsinformationen
 
     # 13
