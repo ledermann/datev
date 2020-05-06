@@ -67,7 +67,7 @@ module Datev
     # Achtung: Auch bei individueller Feldformatierung mit vierstelliger Jahreszahl wird immer in das aktuelle Wirtschaftsjahr importiert, wenn Tag und Monat des Datums im bebuchbaren Zeitraum liegen, da die Jahreszahl nicht berücksichtigt wird.
 
     # 11
-    field 'Belegfeld 1', :string, limit: 36
+    field 'Belegfeld 1', :string, limit: 36, regex: %r{\A[a-zA-Z0-9\$\&\%\*\+\-\/]*\z}
     # Rechnungs-/Belegnummer
     # Das Belegfeld 1 ist der "Schlüssel" für die Verwaltung von Offenen Posten.
     # Bei einer Zahlung oder Gutschrift erfolgt nur dann ein OP-Ausgleich, wenn die Belegnummer mit dem Belegfeld 1 identisch ist.

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Datev::StringField do
-  subject { Datev::StringField.new 'foo', limit: 9, required: true }
+  subject { Datev::StringField.new 'foo', limit: 9, required: true, regex: %r{\A[a-zA-Z0-9\$\&\%\*\+\-\/]*\z} }
 
   describe :validate! do
     it "should accept valid value" do
@@ -14,6 +14,8 @@ describe Datev::StringField do
       end
       expect { subject.validate!('MuchTooLong') }.to raise_error(ArgumentError, "Value 'MuchTooLong' for field 'foo' is too long")
       expect { subject.validate!(nil)           }.to raise_error(ArgumentError, "Value for field 'foo' is required")
+
+      expect { subject.validate!('Ömläüte')     }.to raise_error(ArgumentError, "Value 'Ömläüte' for field 'foo' does not match regex")
     end
   end
 
