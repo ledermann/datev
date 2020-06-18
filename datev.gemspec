@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "datev"
   spec.version       = Datev::VERSION
   spec.authors       = ["Georg Ledermann"]
-  spec.email         = ["mail@georg-ledermann.de"]
+  spec.email         = ["georg@ledermann.dev"]
 
   spec.summary       = %q{Export booking data in DATEV format}
   spec.description   = %q{Provides an easy way to create CSV files which can be imported into accounting applications}
