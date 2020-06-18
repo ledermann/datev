@@ -2,7 +2,7 @@ module Datev
   class AccountHeader < Header
     self.default_attributes = {
       'DATEV-Format-KZ' => 'EXTF',
-      'Versionsnummer'  => 820,
+      'Versionsnummer'  => 700,
       'Datenkategorie'  => 20,
       'Formatname'      => 'Kontenbeschriftungen',
       'Formatversion'   => 2,

@@ -115,7 +115,7 @@ describe Datev::BookingExport do
     end
 
     it "should contain header" do
-      expect(subject.lines[0]).to include('"EXTF";820')
+      expect(subject.lines[0]).to include('"EXTF";700')
     end
 
     it "should contain field names" do
