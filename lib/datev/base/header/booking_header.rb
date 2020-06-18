@@ -2,7 +2,7 @@ module Datev
   class BookingHeader < Header
     self.default_attributes = {
       'DATEV-Format-KZ' => 'EXTF',
-      'Versionsnummer'  => 720,
+      'Versionsnummer'  => 820,
       'Datenkategorie'  => 21,
       'Formatname'      => 'Buchungsstapel',
       'Formatversion'   => 7,
