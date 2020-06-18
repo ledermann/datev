@@ -5,7 +5,7 @@ module Datev
       'Versionsnummer'  => 700,
       'Datenkategorie'  => 21,
       'Formatname'      => 'Buchungsstapel',
-      'Formatversion'   => 7,
+      'Formatversion'   => 9,
       'Erzeugt am'      => Time.now.utc,
       'Sachkontenlänge' => 4,
       'Bezeichnung'     => 'Buchungen',
