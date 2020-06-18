@@ -79,7 +79,7 @@ describe Datev::ContactExport do
     end
 
     it "should contain header" do
-      expect(subject.lines[0]).to include('"EXTF";720')
+      expect(subject.lines[0]).to include('"EXTF";700')
     end
 
     it "should contain field names" do
