@@ -2,7 +2,7 @@
 
 Ruby gem to export bookings and more to DATEV format as CSV file
 
-Supported DATEV Version: 7.2
+Supported DATEV format: v7.0
 
 [![Build Status](https://travis-ci.org/ledermann/datev.svg?branch=master)](https://travis-ci.org/ledermann/datev)
 [![Code Climate](https://codeclimate.com/github/ledermann/datev/badges/gpa.svg)](https://codeclimate.com/github/ledermann/datev)
