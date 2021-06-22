@@ -104,7 +104,7 @@ describe Datev::ContactExport do
         export.to_file(filename)
 
         expect {
-          CSV.read(filename, Datev::Export::CSV_OPTIONS)
+          CSV.read(filename, **Datev::Export::CSV_OPTIONS)
         }.to_not raise_error
       end
     end
