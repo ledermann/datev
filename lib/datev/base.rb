@@ -1,7 +1,16 @@
 module Datev
   class Base
     class << self
-      attr_accessor :fields, :default_attributes
+      attr_accessor :fields
+      attr_writer :default_attributes
+
+      def default_attributes
+        if @default_attributes.is_a?(Proc)
+          @default_attributes.call
+        else
+          @default_attributes
+        end
+      end
 
       def inherited(subclass)
         subclass.fields             = self.fields
