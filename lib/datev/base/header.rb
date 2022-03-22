@@ -7,7 +7,7 @@ module Datev
 
     # 2
     field 'Versionsnummer', :integer, limit: 3
-    # entspricht der zugrundeliegenden Versionsnummer des Scnittstellen-Entwicklungsleitfadens
+    # entspricht der zugrundeliegenden Versionsnummer des Schnittstellen-Entwicklungsleitfadens
 
     # 3
     field 'Datenkategorie', :integer, limit: 2
