@@ -152,11 +152,11 @@ module Datev
     # Buchungsspezifische Inhalte zu den oben genannten Informationsarten
 
     # 37
-    field 'KOST1 – Kostenstelle', :string, limit: 8
+    field "KOST1 – Kostenstelle", :string, limit: 36
     # Über KOST1 erfolgt die Zuordnung des Geschäftsvorfalls für die anschließende Kostenrechnung.
 
     # 38
-    field 'KOST2 – Kostenstelle', :string, limit: 8
+    field "KOST2 – Kostenstelle", :string, limit: 36
     # Über KOST2 erfolgt die Zuordnung des Geschäftsvorfalls für die anschließende Kostenrechnung.
 
     # 39
